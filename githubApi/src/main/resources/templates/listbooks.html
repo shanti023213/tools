@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+
+    <link th:href="@{/webjars/bootstrap/3.3.7-1/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{/css/style.css}" rel="stylesheet"/>
+    <title>Book List</title>
+</head>
+<body>
+<div class="container">
+    <div class="row">
+        <h1>Books</h1>
+    </div>
+    <div class="row">
+        <table class="table">
+            <tr>
+                <th>id</th>
+                <th>Name</th>
+                <th>Number</th>
+            </tr>
+            <tr th:each="book : ${bookPage}">
+                <td th:text="${book.id}"></td>
+                <td th:text="${book.name}"></td>
+                <td th:text="${book.number}"></td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+      
+     <div th:if="${bookPage.totalPages > 0}" class="pagination"
+        th:each="pageNumber : ${pageNumbers}">
+        <a th:href="@{/listBooks(size=${bookPage.size}, page=${pageNumber})}"
+            th:text=${pageNumber}
+            th:class="${pageNumber==bookPage.number + 1} ? active"></a>
+    </div>
+    
+    <div class="list-group">
+    <a class="list-group-item" href="http://www.google.com">
+        <b>Google</b>
+    </a>
+    <a class="list-group-item" href="http://www.stackoverflow.com" target="_blank">
+        <b>Stackoverflow</b>
+    </a>
+    <a class="list-group-item" href="http://www.w3schools.com">
+        <b>W3Schools</b>
+    </a>
+</div>
+   
+</div>
+</div>
+<script th:src="@{/webjars/jquery/1.11.1/jquery.min.js}"></script>
+<script th:src="@{/webjars/bootstrap/3.3.7-1/js/bootstrap.min.js}"></script>
+<script th:src="@{/js/app.js}"></script>
+</body>
+</html>
